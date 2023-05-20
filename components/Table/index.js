@@ -34,7 +34,7 @@ const Table = ({ data }) => {
           {renderData?.map((data) => {
             return (
               <tr
-                className="bg-white border-b bg-gray-800 border-gray-700"
+                className="border-b bg-gray-800 border-gray-700"
                 key={data.name}
               >
                 <th className="px-6 py-4 font-medium whitespace-nowrap text-white">
