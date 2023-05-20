@@ -1,7 +1,21 @@
-import { useFormatter } from "next-intl";
-
 const Table = ({ data }) => {
-  const format = useFormatter();
+  const ammount = 400;
+  const marketCapsSum = data.reduce((accumulator, coin) => {
+    accumulator += coin.market_cap;
+    return accumulator;
+  }, 0);
+
+  const coinsMarketCapsPercents = data.map((coin) => ({
+    name: coin.name,
+    marketCapPercent: coin.market_cap / marketCapsSum,
+  }));
+
+  const renderData = coinsMarketCapsPercents.map((coin) => ({
+    ...coin,
+    roundedMarketCapPercent:
+      Math.round(coin.marketCapPercent * 100 * 10) / 10 + " %",
+    ammount: Math.round(coin.marketCapPercent * ammount),
+  }));
 
   return (
     <>
@@ -9,26 +23,24 @@ const Table = ({ data }) => {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th className="px-6 py-3">Coins</th>
-            <th className="px-6 py-3">Market cap</th>
+            <th className="px-6 py-3">Market cap percent</th>
+            <th className="px-6 py-3">Ammount to invest (10€)</th>
           </tr>
         </thead>
         <tbody>
-          {data?.map((coin) => {
+          {renderData?.map((data) => {
             return (
               <tr
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                key={coin.id}
+                key={data.name}
               >
                 <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {coin.name}
+                  {data.name}
                 </th>
-                <td className="px-6 py-3">
-                  {format.number(coin.market_cap, {
-                    maximumSignificantDigits: 10,
-                    style: "currency",
-                    currency: "USD",
-                  })}
+                <td className="px-6 py-3 text-center">
+                  {data.roundedMarketCapPercent}
                 </td>
+                <td className="px-6 py-3 text-center">{data.ammount} €</td>
               </tr>
             );
           })}
