@@ -24,7 +24,7 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="flex flex-col items-center justify-center h-screen dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center h-screen bg-gray-900">
           <h1 className="text-3xl font-bold mb-20 text-gray-300">
             Market Cap Portfolio
           </h1>
