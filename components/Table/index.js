@@ -1,5 +1,8 @@
+import React, { useState, useEffect } from "react";
+
 const Table = ({ data }) => {
-  const ammount = 400;
+  const [ammount, setAmmount] = useState(400);
+
   const marketCapsSum = data.reduce((accumulator, coin) => {
     accumulator += coin.market_cap;
     return accumulator;
@@ -46,6 +49,11 @@ const Table = ({ data }) => {
           })}
         </tbody>
       </table>
+      <input
+        type="text"
+        value={ammount}
+        onChange={(e) => setAmmount(e.target.value)}
+      />
     </>
   );
 };
