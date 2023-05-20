@@ -24,7 +24,7 @@ const Table = ({ data }) => {
           <tr>
             <th className="px-6 py-3">Coins</th>
             <th className="px-6 py-3">Market cap percent</th>
-            <th className="px-6 py-3">Ammount to invest (10€)</th>
+            <th className="px-6 py-3">Ammount to invest ({ammount}€)</th>
           </tr>
         </thead>
         <tbody>
